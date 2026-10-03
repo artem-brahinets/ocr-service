@@ -6,8 +6,6 @@ Simple FastAPI service for extracting text from images using OpenCV and Tesserac
 
 Created for practicing backend and DevOps skills.
 
----
-
 ## Stack
 
 * Python 3.14
@@ -16,8 +14,6 @@ Created for practicing backend and DevOps skills.
 * Tesseract OCR
 * Pytest
 * Docker
-
----
 
 ## API
 
@@ -29,8 +25,6 @@ Accepts an image and returns recognized text.
 
 Health check endpoint.
 
----
-
 ## Tests
 
 Run tests locally:
@@ -38,8 +32,6 @@ Run tests locally:
 ```bash
 python -m pytest
 ```
-
----
 
 ## Docker
 
@@ -66,8 +58,6 @@ Health check:
 ```bash
 curl http://localhost:8000/health
 ```
-
----
 
 ## Version History
 
