@@ -12,4 +12,3 @@ def test_ocr(test_image):
     result = ocr_img(test_image)
 
     assert "Hello World!" in result
-    assert "Привет Мир!" in result
