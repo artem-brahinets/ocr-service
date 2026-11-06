@@ -1,15 +1,33 @@
-from fastapi import FastAPI
-from fastapi import UploadFile, File
-from app.services import ocr_service
+from contextlib import asynccontextmanager
 import uvicorn
+from fastapi import FastAPI, Depends
+from fastapi import UploadFile, File
+from sqlalchemy.orm import Session
 
-app = FastAPI()
+from app.db.init_db import init_db
+from app.db.database import get_db
+from app.services import ocr_service
+from app.services.ocr_request_service import save_ocr_request
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.post("/ocr")
-async def ocr(image: UploadFile = File(...)):
+async def ocr(image: UploadFile = File(...),
+              db: Session = Depends(get_db)):
     image_bytes = await image.read()
+    image_hash = ocr_service.hash_image(image_bytes)
     text_from_img = ocr_service.ocr_img(image_bytes)
+
+    save_ocr_request(db, image_hash, text_from_img)
+
     return {"text_from_img": text_from_img}
 
 
