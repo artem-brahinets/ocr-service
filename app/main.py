@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.db.init_db import init_db
 from app.db.database import get_db
 from app.services import ocr_service
-from app.services.ocr_request_service import save_ocr_request
+from app.services.ocr_request_service import save_ocr_request, get_ocr_request
 
 
 @asynccontextmanager
@@ -24,9 +24,14 @@ async def ocr(image: UploadFile = File(...),
               db: Session = Depends(get_db)):
     image_bytes = await image.read()
     image_hash = ocr_service.hash_image(image_bytes)
-    text_from_img = ocr_service.ocr_img(image_bytes)
 
-    save_ocr_request(db, image_hash, text_from_img)
+    ocr_request = get_ocr_request(db, image_hash)
+
+    if ocr_request is not None:
+        text_from_img = ocr_request.recognized_text
+    else:
+        text_from_img = ocr_service.ocr_img(image_bytes)
+        save_ocr_request(db, image_hash, text_from_img)
 
     return {"text_from_img": text_from_img}
 
