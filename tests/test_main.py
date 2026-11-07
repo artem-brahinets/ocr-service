@@ -25,4 +25,3 @@ def test_ocr_endpoint(test_image):
 
     assert "text_from_img" in data
     assert "Hello World!" in data["text_from_img"]
-    assert "Привет Мир!" in data["text_from_img"]

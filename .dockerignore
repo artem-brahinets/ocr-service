@@ -1,7 +1,6 @@
 .idea/
 .git/
 .gitignore
-tests/
 .venv/
 __pycache__/
 *.pyc
