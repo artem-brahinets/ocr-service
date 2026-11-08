@@ -1,6 +1,7 @@
-from app.ocr.preprocessing import preprocess
-import pytest
 import numpy as np
+import pytest
+
+from app.ocr.preprocessing import preprocess
 
 
 @pytest.fixture

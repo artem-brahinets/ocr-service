@@ -1,4 +1,5 @@
 import pytest
+
 from app.services.ocr_service import ocr_img
 
 

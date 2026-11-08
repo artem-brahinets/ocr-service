@@ -1,8 +1,7 @@
 import os
 
-from sqlalchemy import create_engine, URL
+from sqlalchemy import URL, create_engine
 from sqlalchemy.orm import sessionmaker
-
 
 POSTGRES_USER = os.environ.get("POSTGRES_USER")
 POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")

@@ -1,13 +1,13 @@
 from contextlib import asynccontextmanager
+
 import uvicorn
-from fastapi import FastAPI, Depends
-from fastapi import UploadFile, File
+from fastapi import Depends, FastAPI, File, UploadFile
 from sqlalchemy.orm import Session
 
-from app.db.init_db import init_db
 from app.db.database import get_db
+from app.db.init_db import init_db
 from app.services import ocr_service
-from app.services.ocr_request_service import save_ocr_request, get_ocr_request
+from app.services.ocr_request_service import get_ocr_request, save_ocr_request
 
 
 @asynccontextmanager

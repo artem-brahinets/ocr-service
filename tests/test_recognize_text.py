@@ -1,6 +1,7 @@
-from app.ocr.recognize_text import recognize_text
-from app.ocr.preprocessing import preprocess
 import pytest
+
+from app.ocr.preprocessing import preprocess
+from app.ocr.recognize_text import recognize_text
 
 
 @pytest.fixture
